@@ -48,8 +48,8 @@ public class PartnerDBO extends AbstractEntity<PartnerDBO> {
     private String email;
     private String website;
     private String partnerType;
-    private Calendar creationTime;
-    private Calendar lastUpdateTime;
+    private Calendar creationTime = Calendar.getInstance();
+    private Calendar lastUpdateTime = Calendar.getInstance();
     
     List<ApplicationDBO> applications = new ArrayList<ApplicationDBO>();
 

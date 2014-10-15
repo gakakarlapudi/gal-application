@@ -27,9 +27,9 @@ public class ApplicationRepresentation extends AbstractRepresentation{
 	private String appVersion;
 	private String downloadLink;
 	private String platform;
-	private double averageRating;
-	private int ratingCount;
-	private int popularity;
+	private Double averageRating;
+	private Integer ratingCount;
+	private Integer popularity;
 	private Date creationTime;
 	private Date lastUpdateTime;
 
@@ -86,27 +86,27 @@ public class ApplicationRepresentation extends AbstractRepresentation{
 		this.platform = platform;
 	}
 
-	public double getAverageRating() {
+	public Double getAverageRating() {
 		return averageRating;
 	}
 
-	public void setAverageRating(double averageRating) {
+	public void setAverageRating(Double averageRating) {
 		this.averageRating = averageRating;
 	}
 
-	public int getRatingCount() {
+	public Integer getRatingCount() {
 		return ratingCount;
 	}
 
-	public void setRatingCount(int ratingCount) {
+	public void setRatingCount(Integer ratingCount) {
 		this.ratingCount = ratingCount;
 	}
 
-	public int getPopularity() {
+	public Integer getPopularity() {
 		return popularity;
 	}
 
-	public void setPopularity(int popularity) {
+	public void setPopularity(Integer popularity) {
 		this.popularity = popularity;
 	}
 
@@ -136,7 +136,7 @@ public class ApplicationRepresentation extends AbstractRepresentation{
 		this.locales = locales;
 	}
 
-	@XmlElement(name = "facet")
+	@XmlElement(name = "partner")
     public Link getPartner() {
         return partner;
     }

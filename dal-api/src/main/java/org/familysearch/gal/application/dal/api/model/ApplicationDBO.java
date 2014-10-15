@@ -4,9 +4,9 @@
 
 package org.familysearch.gal.application.dal.api.model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -53,14 +53,14 @@ public class ApplicationDBO extends AbstractEntity<ApplicationDBO> {
     private String appVersion;
     private String downloadLink;
     private String platform;
-    private double averageRating;
-    private int ratingCount;
-    private int popularity;
-    private Calendar creationTime;
-    private Calendar lastUpdateTime;
+    private Double averageRating;
+    private Integer ratingCount;
+    private Integer popularity;
+    private Calendar creationTime = Calendar.getInstance();
+    private Calendar lastUpdateTime = Calendar.getInstance();
     private Long version = Long.valueOf(0);
 
-    List<ApplicationLocaleDBO> locales = new ArrayList<ApplicationLocaleDBO>();
+    Set<ApplicationLocaleDBO> locales = new HashSet<ApplicationLocaleDBO>();
 
     /**
      * Default constructor
@@ -138,7 +138,7 @@ public class ApplicationDBO extends AbstractEntity<ApplicationDBO> {
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "partner_id", nullable = false)
+    @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "partner_id")
     public PartnerDBO getPartner() {
         return partner;
     }
@@ -197,30 +197,27 @@ public class ApplicationDBO extends AbstractEntity<ApplicationDBO> {
         this.platform = platform;
     }
 
-    @Column(nullable = true)
-    public double getAverageRating() {
+    public Double getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(double averageRating) {
+    public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
     }
 
-    @Column(nullable = true)
-    public int getRatingCount() {
+    public Integer getRatingCount() {
         return ratingCount;
     }
 
-    public void setRatingCount(int ratingCount) {
+    public void setRatingCount(Integer ratingCount) {
         this.ratingCount = ratingCount;
     }
 
-    @Column(nullable = true)
-    public int getPopularity() {
+    public Integer getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(int popularity) {
+    public void setPopularity(Integer popularity) {
         this.popularity = popularity;
     }
 
@@ -245,11 +242,11 @@ public class ApplicationDBO extends AbstractEntity<ApplicationDBO> {
     }
 
     @OneToMany(mappedBy = "application", fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
-    public List<ApplicationLocaleDBO> getLocales() {
+    public Set<ApplicationLocaleDBO> getLocales() {
         return locales;
     }
 
-    public void setLocales(List<ApplicationLocaleDBO> locales) {
+    public void setLocales(Set<ApplicationLocaleDBO> locales) {
         this.locales = locales;
     }
 

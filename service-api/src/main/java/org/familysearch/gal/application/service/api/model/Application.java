@@ -1,8 +1,8 @@
 package org.familysearch.gal.application.service.api.model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ public class Application {
 
     @NotNull
     private UUID uuid;
-    private Partner partner;
+    private UUID partnerId;
     @Size(max = 45)
     private String appStatus;
     @Size(max = 255)
@@ -36,7 +36,7 @@ public class Application {
     private Calendar creationTime;
     private Calendar lastUpdateTime;
 
-    List<ApplicationLocale> locales = new ArrayList<ApplicationLocale>();
+    Set<ApplicationLocale> locales = new HashSet<ApplicationLocale>();
 
     public Application() {
     }
@@ -48,11 +48,11 @@ public class Application {
      */
     public Application(Application that) {
         this.uuid = that.getUuid();
-        this.partner = that.getPartner();
+        this.partnerId = that.getPartnerId();
         this.appStatus = that.getAppStatus();
         this.appName = that.getAppName();
         this.appVersion = that.getAppVersion();
-        this.downloadLink =  that.getDownloadLink();
+        this.downloadLink = that.getDownloadLink();
         this.platform = that.getPlatform();
         this.averageRating = that.getAverageRating();
         this.ratingCount = that.getRatingCount();
@@ -76,12 +76,12 @@ public class Application {
         this.uuid = uuid;
     }
 
-    public Partner getPartner() {
-        return partner;
+    public UUID getPartnerId() {
+        return partnerId;
     }
 
-    public void setPartner(Partner partner) {
-        this.partner = partner;
+    public void setPartnerId(UUID partnerId) {
+        this.partnerId = partnerId;
     }
 
     public String getAppStatus() {
@@ -164,23 +164,12 @@ public class Application {
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    public List<ApplicationLocale> getLocales() {
+    public Set<ApplicationLocale> getLocales() {
         return locales;
     }
 
-    public void setLocales(List<ApplicationLocale> locales) {
+    public void setLocales(Set<ApplicationLocale> locales) {
         this.locales = locales;
-    }
-
-    @Override
-    public String toString() {
-        return "Application [uuid=" + uuid + ", partner=" + partner
-               + ", appStatus=" + appStatus + ", appName=" + appName
-               + ", appVersion=" + appVersion + ", downloadLink="
-               + downloadLink + ", platform=" + platform + ", averageRating="
-               + averageRating + ", ratingCount=" + ratingCount
-               + ", popularity=" + popularity + ", creationTime="
-               + creationTime + ", lastUpdateTime=" + lastUpdateTime + "]";
     }
 
 }

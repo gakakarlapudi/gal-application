@@ -13,6 +13,7 @@
 		<exclude pattern="org.familysearch.digitalarchive.**" />
 	</api-classes>
 	
+	<api-import pattern="org.familysearch.gal.shared.rest.support.**" />
     <api-import pattern="org.familysearch.gal.application.rest.api.support.**" />
 	<api-import pattern="org.familysearch.gal.application.rest.api.endpoints.**" />
 	<api-import pattern="org.familysearch.gal.application.rest.api.model.**" />

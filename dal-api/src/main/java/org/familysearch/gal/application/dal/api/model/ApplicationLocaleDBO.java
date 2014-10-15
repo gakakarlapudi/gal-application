@@ -6,19 +6,18 @@ package org.familysearch.gal.application.dal.api.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Calendar;
+import java.util.Locale;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
@@ -32,18 +31,17 @@ import org.hibernate.validator.constraints.Length;
  */
 @Entity
 @Table(name = "application_locale", uniqueConstraints = @UniqueConstraint(columnNames = { "application_id", "locale" }))
+@IdClass(ApplicationLocaleAssociationId.class)
 public class ApplicationLocaleDBO implements Serializable {
 
     private static final long serialVersionUID = 873245192978870789L;
 
     private Long applicationId;
     private ApplicationDBO application;
-    private String locale;
+    private Locale locale;
     private String title;
-    private byte[] description;
+    private byte[] descriptionData;
     private String appSummary;
-    private Calendar creationTime;
-    private Calendar lastUpdateTime;
 
     /**
      * Default constructor
@@ -60,10 +58,8 @@ public class ApplicationLocaleDBO implements Serializable {
         this.application = other.getApplication();
         this.locale = other.getLocale();
         this.title = other.getTitle();
-        this.description = other.getDescription();
+        this.descriptionData = other.getDescriptionData();
         this.appSummary = other.getAppSummary();
-        this.creationTime = other.getCreationTime();
-        this.lastUpdateTime = other.getLastUpdateTime();
     }
 
     /**
@@ -93,13 +89,14 @@ public class ApplicationLocaleDBO implements Serializable {
         this.application = application;
     }
 
+    @Id
     @Length(max = 45)
     @Column(name = "locale", length = 45, nullable = false)
-    public String getLocale() {
+    public Locale getLocale() {
         return locale;
     }
 
-    public void setLocale(String locale) {
+    public void setLocale(Locale locale) {
         this.locale = locale;
     }
 
@@ -125,49 +122,21 @@ public class ApplicationLocaleDBO implements Serializable {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(length = 16000000)
-    public byte[] getDescription() {
-        return (description == null) ? null : Arrays.copyOf(description, description.length);
+    @Column(name = "description", length = 16000000)
+    public byte[] getDescriptionData() {
+        return (descriptionData == null) ? null : Arrays.copyOf(descriptionData, descriptionData.length);
     }
 
-    public void setDescription(byte[] description) {
-        this.description = (description == null) ? null : Arrays.copyOf(description, description.length);
+    public void setDescriptionData(byte[] descriptionData) {
+        this.descriptionData = (descriptionData == null) ? null : Arrays.copyOf(descriptionData, descriptionData.length);
     }
-
-    /**
-     * @return the creationTime
-     */
-    @NotNull
-    @Column(name = "creationTime", insertable = true, nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    public Calendar getCreationTime() {
-        return creationTime;
-    }
-
-    /**
-     * @param creationTime
-     *            the creationTime to set
-     */
-    public void setCreationTime(Calendar creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    @NotNull
-    @Column(name = "lastUpdateTime", insertable = true, nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    public Calendar getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    public void setLastUpdateTime(Calendar lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
+    
 
     @Override
     public String toString() {
         return "ApplicationLocaleDBO [applicationId=" + applicationId + ", application=" + application + ", locale="
-               + locale + ", title=" + title + ", description=" + Arrays.toString(description) + ", appSummary="
-               + appSummary + ", creationTime=" + creationTime + ", lastUpdateTime=" + lastUpdateTime + "]";
+               + locale + ", title=" + title + ", descriptionData=" + Arrays.toString(descriptionData)
+               + ", appSummary=" + appSummary + "]";
     }
 
     /*

@@ -15,6 +15,10 @@
             <groupId>org.familysearch.gal.api</groupId>
             <artifactId>gal-application-rest-api</artifactId>
         </dependency>
+        <dependency>
+			<groupId>org.familysearch.gal-super-api</groupId>
+			<artifactId>gal-shared</artifactId>
+		</dependency>
 
         <!-- Logging -->
         <dependency>

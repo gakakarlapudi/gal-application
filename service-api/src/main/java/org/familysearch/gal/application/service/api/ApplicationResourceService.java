@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.familysearch.gal.application.service.api.model.Application;
+import org.familysearch.gal.shared.model.Page;
 
 /**
  * Resource Services for Application
@@ -15,8 +16,7 @@ public interface ApplicationResourceService {
      * 
      * @return list of all application resources
      */
-    List<Application> findAll();
-
+    List<Application> findAll(Page pageObject);
 
     /**
      * Retrieve the application which is identified by the unique application identifier
